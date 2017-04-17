@@ -25,7 +25,6 @@ package org.PrimeSoft.MCPainter.Drawing.Blocks;
 
 import org.PrimeSoft.MCPainter.Drawing.CubeFace;
 import org.PrimeSoft.MCPainter.Drawing.RawImage;
-import org.PrimeSoft.MCPainter.Texture.TextureEntry;
 import org.PrimeSoft.MCPainter.Texture.TextureManager;
 import org.bukkit.configuration.ConfigurationSection;
 

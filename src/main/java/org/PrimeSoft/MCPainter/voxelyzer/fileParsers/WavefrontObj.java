@@ -251,7 +251,6 @@ public class WavefrontObj {
                 if (matParts.length > 0) {
                     if (matParts[0].equalsIgnoreCase(MAT_NAME)) {
                         if (name != null && name.length() > 0) {
-                            Material m = null;
                             if (texture != null) {
                                 result.add(new Material(name, texture));
                             } else if (color != null) {
@@ -273,7 +272,6 @@ public class WavefrontObj {
             }
 
             if (name != null && name.length() > 0) {
-                Material m = null;
                 if (texture != null) {
                     result.add(new Material(name, texture));
                 } else if (color != null) {

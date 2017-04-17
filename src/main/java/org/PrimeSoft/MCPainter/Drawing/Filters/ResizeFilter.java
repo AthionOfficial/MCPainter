@@ -76,7 +76,6 @@ public class ResizeFilter implements IImageFilter {
             m_interpolate = interpolate;
         }
 
-        @Override
         public String print() {
             StringBuilder sb = new StringBuilder();
             if (m_w < 1) {
@@ -96,17 +95,14 @@ public class ResizeFilter implements IImageFilter {
         }
     }
 
-    @Override
     public String getName() {
         return "resize";
     }
 
-    @Override
     public boolean hasPerms(Player player) {
         return PermissionManager.isAllowed(player, PermissionManager.Perms.FilterResize);
     }
 
-    @Override
     public BufferedImage process(BufferedImage src, IFilterParams params) {
         if (params == null || !(params instanceof ResizeParams)) {
             return null;
@@ -146,7 +142,6 @@ public class ResizeFilter implements IImageFilter {
         return result;
     }
 
-    @Override
     public FilterEntry getEntry(String[] args) {
         int argc = (args != null) ? args.length : 0;
         if (argc < 2 || argc > 3) {
@@ -184,7 +179,6 @@ public class ResizeFilter implements IImageFilter {
                 this, new ResizeParams(w, h, interpolate));
     }
 
-    @Override
     public String[] getHelp() {
         final String[] help = new String[]{
             ChatColor.YELLOW + getName() + ChatColor.WHITE + " - resize the source image",
@@ -196,7 +190,6 @@ public class ResizeFilter implements IImageFilter {
         return help;
     }
 
-    @Override
     public String getPriceName() {
         return "filters.resize";
     }

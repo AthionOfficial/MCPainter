@@ -325,7 +325,7 @@ public class ConfigProvider {
      */
     private static SizeNode[] parseSizeNodeSection(
             ConfigurationSection mainSection) {
-        List<SizeNode> sizeEntries = new ArrayList();
+        List<SizeNode> sizeEntries = new ArrayList<SizeNode>();
         for (String string : mainSection.getStringList("maxSizeNodes")) {
             try {
                 sizeEntries.add(new SizeNode(string));

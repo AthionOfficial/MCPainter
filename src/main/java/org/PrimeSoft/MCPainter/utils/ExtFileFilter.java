@@ -46,7 +46,6 @@ public class ExtFileFilter implements FileFilter {
         m_extensions = extensions == null ? new String[0] : extensions;
     }
 
-    @Override
     public boolean accept(File pathname) {
         if (!(pathname.isFile() && pathname.canRead())) {
             return false;

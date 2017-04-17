@@ -1,26 +1,3 @@
-/*
- * The MIT License
- *
- * Copyright 2013 SBPrime.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 package org.PrimeSoft.MCPainter.blocksplacer;
 
 import java.util.ArrayDeque;
@@ -28,14 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
-import org.PrimeSoft.MCPainter.BlocksHubIntegration;
 import org.PrimeSoft.MCPainter.Configuration.ConfigProvider;
 import org.PrimeSoft.MCPainter.MCPainterMain;
-import org.PrimeSoft.MCPainter.utils.BaseBlock;
-import org.PrimeSoft.MCPainter.utils.Vector;
-import org.PrimeSoft.MCPainter.worldEdit.IEditSession;
-import org.PrimeSoft.MCPainter.worldEdit.MaxChangedBlocksException;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
@@ -50,10 +21,6 @@ public class BlockPlacer implements Runnable {
      */
     private final Object m_mutex = new Object();
 
-    /**
-     * The block hub
-     */
-    private final BlocksHubIntegration m_blocksHub;
     /**
      * Bukkit scheduler
      */
@@ -85,8 +52,7 @@ public class BlockPlacer implements Runnable {
      * @param plugin parent
      * @param blocksHub
      */
-    public BlockPlacer(MCPainterMain plugin, BlocksHubIntegration blocksHub) {
-        m_blocksHub = blocksHub;
+    public BlockPlacer(MCPainterMain plugin) {
         m_blocks = new HashMap<String, Queue<BlockLogerEntry>>();
         m_scheduler = plugin.getServer().getScheduler();
         m_queueHard = ConfigProvider.getQueueHardLimit();
@@ -98,7 +64,6 @@ public class BlockPlacer implements Runnable {
     /**
      * Block placer main loop
      */
-    @Override
     public void run() {
         List<BlockLogerEntry> entries = new ArrayList<BlockLogerEntry>(ConfigProvider.getBlockCount());
         synchronized (m_mutex) {
@@ -254,19 +219,5 @@ public class BlockPlacer implements Runnable {
             return;
         }
         entry.execute(this);
-    }
-
-    /**
-     * Log block operation for core protection
-     *
-     * @param v block possition
-     * @param oldBlock old block
-     * @param newBlock new block
-     * @param name player name
-     * @param world world
-     */
-    public void logBlock(Vector v, BaseBlock oldBlock, BaseBlock newBlock,
-            String name, World world) {
-        m_blocksHub.logBlock(name, world, v, oldBlock, newBlock);
     }
 }

@@ -209,7 +209,6 @@ public class RenderCommand implements Runnable {
         m_sender = sender;
     }
 
-    @Override
     public void run() {
         BlockLoger loger = new BlockLoger(m_player, m_lSession, m_session, m_sender);
 

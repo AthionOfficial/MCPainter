@@ -27,8 +27,6 @@ import java.awt.Color;
 import java.util.EnumSet;
 import org.PrimeSoft.MCPainter.Configuration.BlockEntry;
 import org.PrimeSoft.MCPainter.Configuration.OperationType;
-import org.PrimeSoft.MCPainter.blocksplacer.BlockLoger;
-import org.PrimeSoft.MCPainter.utils.BaseBlock;
 import org.PrimeSoft.MCPainter.utils.Vector;
 
 /**
@@ -37,11 +35,6 @@ import org.PrimeSoft.MCPainter.utils.Vector;
  */
 public class DrawingBlock implements IDrawingBlock {
     public static DrawingBlock AIR = new DrawingBlock(BlockEntry.AIR, BlockEntry.AIR_COLOR);
-
-    /**
-     * The block to place
-     */
-    private final BaseBlock m_block;
 
     /**
      * The assigned color
@@ -58,24 +51,22 @@ public class DrawingBlock implements IDrawingBlock {
         return m_color;
     }
 
-    @Override
     public EnumSet<OperationType> getType() {
         return m_type;
     }
     
     public DrawingBlock(BlockEntry block, Color color) {
-        m_block = block.getBlock();
+        block.getBlock();
         m_color = color;
         m_type = block.getType();
     }
-
-    @Override
-    public void place(Vector origin, Vector offset, BlockLoger loger) {
-        loger.logBlock(origin.add(offset), m_block);
-    }
     
-    @Override
     public boolean isAir(){
         return this == AIR;
     }
+
+	public void place(Vector origin, Vector offset) {
+		// TODO Auto-generated method stub
+		
+	}
 }

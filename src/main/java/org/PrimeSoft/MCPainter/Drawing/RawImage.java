@@ -25,7 +25,6 @@ package org.PrimeSoft.MCPainter.Drawing;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
-import org.apache.commons.lang.NullArgumentException;
 
 /**
  *

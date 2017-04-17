@@ -38,7 +38,6 @@ public class VanillaBlockProvider implements IBlockProvider {
     private final VanillaTextureProvider m_tex;
     private final Map<Integer, IDrawableElement> m_blockFaces;
 
-    @Override
     public int getBlocksCount() {
         return m_blockFaces.size();
     }
@@ -59,7 +58,6 @@ public class VanillaBlockProvider implements IBlockProvider {
         m_blockFaces.put(0x64, new Shroom(m_tex, 2)); //64 - Huge red mushroom
     }
 
-    @Override
     public IDrawableElement getBlock(String name) {
         Material blockMaterial = Material.getMaterial(name.toUpperCase());
         if (blockMaterial == null) {
@@ -70,7 +68,6 @@ public class VanillaBlockProvider implements IBlockProvider {
         return getBlock(materialId);
     }
 
-    @Override
     public IDrawableElement getBlock(int materialId) {
         if (m_blockFaces.containsKey(materialId))
         {

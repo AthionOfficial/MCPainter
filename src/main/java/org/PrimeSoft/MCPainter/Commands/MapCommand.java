@@ -24,10 +24,8 @@
 package org.PrimeSoft.MCPainter.Commands;
 
 import java.awt.image.BufferedImage;
-import org.PrimeSoft.MCPainter.Configuration.ConfigProvider;
 import org.PrimeSoft.MCPainter.Drawing.Filters.FilterManager;
 import org.PrimeSoft.MCPainter.Drawing.ImageHelper;
-import org.PrimeSoft.MCPainter.FoundManager;
 import org.PrimeSoft.MCPainter.Help;
 import org.PrimeSoft.MCPainter.MapDrawer.MapHelper;
 import org.PrimeSoft.MCPainter.MCPainterMain;
@@ -44,128 +42,113 @@ import org.bukkit.map.MapView;
  */
 public class MapCommand {
 
-    private MapHelper m_mapHelper;
+	private MapHelper m_mapHelper;
 
-    public MapCommand(MapHelper mapHelper) {
-        m_mapHelper = mapHelper;
-    }
+	public MapCommand(MapHelper mapHelper) {
+		m_mapHelper = mapHelper;
+	}
 
-    public void Execte(MCPainterMain sender, Player player, String[] args) {
-        if (args.length < 2 || args.length > 5) {
-            Help.ShowHelp(player, Commands.COMMAND_IMAGEMAP);
-            return;
-        }
+	public void Execte(MCPainterMain sender, Player player, String[] args) {
+		if (args.length < 2 || args.length > 5) {
+			Help.ShowHelp(player, Commands.COMMAND_IMAGEMAP);
+			return;
+		}
 
-        short mapId = -1;
-        String url = null;
-        int offset;
+		short mapId = -1;
+		String url = null;
+		int offset;
 
-        try {
-            mapId = (short) Integer.parseInt(args[1]);
-            url = args[2];
-            offset = 3;
-        } catch (NumberFormatException ex) {
-            url = args[1];
-            offset = 2;
+		try {
+			mapId = (short) Integer.parseInt(args[1]);
+			url = args[2];
+			offset = 3;
+		} catch (NumberFormatException ex) {
+			url = args[1];
+			offset = 2;
 
-            ItemStack inHand = player.getItemInHand();
+			ItemStack inHand = player.getInventory().getItemInMainHand();
 
-            if (inHand != null && inHand.getType() == Material.MAP) {
-                mapId = inHand.getDurability();
-            }
-        }
+			if (inHand != null && inHand.getType() == Material.MAP) {
+				mapId = inHand.getDurability();
+			}
+		}
 
 
-        boolean reset = url.equalsIgnoreCase("reset");
+		boolean reset = url.equalsIgnoreCase("reset");
 
-        MapView mapView = null;
-        if (mapId == -1 && !reset) {
-            mapView = Bukkit.createMap(player.getWorld());
-            mapId = mapView.getId();
-            player.setItemInHand(new ItemStack(Material.MAP, 1, mapId));
-        }
-        if (mapView == null) {
-            try {
-                mapView = Bukkit.getMap(mapId);
-            } catch (Exception ex) {
-                ExceptionHelper.printException(ex, "Unable to get map #" + mapId);
-            }
+		MapView mapView = null;
+		if (mapId == -1 && !reset) {
+			mapView = Bukkit.createMap(player.getWorld());
+			mapId = mapView.getId();
+			player.getInventory().setItemInMainHand(new ItemStack(Material.MAP, 1, mapId));
+		}
+		if (mapView == null) {
+			try {
+				mapView = Bukkit.getMap(mapId);
+			} catch (Exception ex) {
+				ExceptionHelper.printException(ex, "Unable to get map #" + mapId);
+			}
 
-            if (mapView == null) {
-                MCPainterMain.say(player, ChatColor.RED + "Map ID " + mapId + " not fond.");
-                return;
-            }
-        }
+			if (mapView == null) {
+				MCPainterMain.say(player, ChatColor.RED + "Map ID " + mapId + " not fond.");
+				return;
+			}
+		}
 
-        if (reset) {
-            m_mapHelper.deleteMap(mapView);
-        } else {
-            sender.getServer().getScheduler().runTaskAsynchronously(sender,
-                    new CommandThread(sender, player, args, url, mapView, offset));
-        }
-    }
+		if (reset) {
+			m_mapHelper.deleteMap(mapView);
+		} else {
+			sender.getServer().getScheduler().runTaskAsynchronously(sender,
+					new CommandThread(sender, player, args, url, mapView, offset));
+		}
+	}
 
-    private class CommandThread implements Runnable {
+	private class CommandThread implements Runnable {
 
-        private final String[] m_args;
-        private final String m_url;
-        private final Player m_player;
-        private final MapView m_mapView;
-        private final int m_offset;
-        private final MCPainterMain m_sender;
+		private final String m_url;
+		private final Player m_player;
+		private final MapView m_mapView;
+		private final MCPainterMain m_sender;
 
-        private CommandThread(MCPainterMain sender, Player player, String[] args,
-                String url, MapView mapView, int offset) {
-            m_sender = sender;
-            m_args = args;
-            m_player = player;
-            m_url = url;
-            m_mapView = mapView;
-            m_offset = offset;
-        }
+		private CommandThread(MCPainterMain sender, Player player, String[] args,
+				String url, MapView mapView, int offset) {
+			m_sender = sender;
+			m_player = player;
+			m_url = url;
+			m_mapView = mapView;
+		}
 
-        @Override
-        public void run() {
-            FilterManager fm = FilterManager.getFilterManager(m_player);
-            double price = ConfigProvider.getCommandPrice("map") + fm.getPrice();
-            synchronized (FoundManager.getMutex()) {
-                if (price > 0 && FoundManager.getMoney(m_player) < price) {
-                    MCPainterMain.say(m_player, ChatColor.RED + "You don't have sufficient funds to apply all the filters and draw the map.");
-                    return;
-                }
+		public void run() {
+			FilterManager fm = FilterManager.getFilterManager(m_player);
+			MCPainterMain.say(m_player, "Loading image...");
+			BufferedImage img = ImageHelper.downloadImage(m_url);
+			if (img == null) {
+				MCPainterMain.say(m_player, ChatColor.RED + "Error downloading image " + ChatColor.WHITE + m_url);
+				return;
+			}
 
-                MCPainterMain.say(m_player, "Loading image...");
-                BufferedImage img = ImageHelper.downloadImage(m_url);
-                if (img == null) {
-                    MCPainterMain.say(m_player, ChatColor.RED + "Error downloading image " + ChatColor.WHITE + m_url);
-                    return;
-                }
+			img = fm.applyFilters(img, null);
+			final BufferedImage fImg = img;
+			int hh = img.getHeight();
+			int ww = img.getWidth();
 
-                img = fm.applyFilters(img, null);
-                final BufferedImage fImg = img;
-                int hh = img.getHeight();
-                int ww = img.getWidth();
+			if (ww > 128 || hh > 128) {
+				MCPainterMain.say(m_player, ChatColor.RED + "The images size cannot be greater than 128x128.");
+				return;
+			}
 
-                if (ww > 128 || hh > 128) {
-                    MCPainterMain.say(m_player, ChatColor.RED + "The images size cannot be greater than 128x128.");
-                    return;
-                }
+			m_sender.getServer().getScheduler().runTask(m_sender, new Runnable() {
 
-                m_sender.getServer().getScheduler().runTask(m_sender, new Runnable() {
+				public void run() {
+					MCPainterMain.say(m_player, "Drawing image...");
 
-                    @Override
-                    public void run() {
-                        MCPainterMain.say(m_player, "Drawing image...");
+					m_mapHelper.storeMap(m_mapView, fImg);
+					m_mapHelper.drawImage(m_mapView, fImg);
 
-                        m_mapHelper.storeMap(m_mapView, fImg);
-                        m_mapHelper.drawImage(m_mapView, fImg);
+					MCPainterMain.say(m_player, "Drawing image done.");
+				}
+			});
 
-                        MCPainterMain.say(m_player, "Drawing image done.");
-                    }
-                });
-                
-                FoundManager.subtractMoney(m_player, price);
-            }
-        }
-    }
+		}
+	}
 }

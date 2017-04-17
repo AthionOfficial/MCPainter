@@ -29,5 +29,10 @@ package org.PrimeSoft.MCPainter.worldEdit;
  * @author SBPrime
  */
 public class MaxChangedBlocksException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
     
 }

@@ -117,7 +117,6 @@ public class CropFilter implements IImageFilter {
             m_interpolate = interpolate;
         }
 
-        @Override
         public String print() {
             StringBuilder sb = new StringBuilder();
             sb.append(m_x1);
@@ -134,17 +133,14 @@ public class CropFilter implements IImageFilter {
         }
     }
 
-    @Override
     public String getName() {
         return "crop";
     }
 
-    @Override
     public boolean hasPerms(Player player) {
         return PermissionManager.isAllowed(player, PermissionManager.Perms.FilterCrop);
     }
 
-    @Override
     public BufferedImage process(BufferedImage src, IFilterParams params) {
         if (params == null || !(params instanceof CropParams)) {
             return null;
@@ -160,7 +156,6 @@ public class CropFilter implements IImageFilter {
         return crop(src, x1, y1, x2, y2, interpolate);
     }
 
-    @Override
     public FilterEntry getEntry(String[] args) {
         int argc = (args != null) ? args.length : 0;
         if (argc < 4 || argc > 5) {
@@ -192,7 +187,6 @@ public class CropFilter implements IImageFilter {
         return new FilterEntry(this, new CropParams(x1, y1, x2, y2, interpolate));
     }
 
-    @Override
     public String[] getHelp() {
         final String[] help = new String[]{
             ChatColor.YELLOW + getName() + ChatColor.WHITE + " - cut a part of the source image",
@@ -204,7 +198,6 @@ public class CropFilter implements IImageFilter {
         return help;
     }
 
-    @Override
     public String getPriceName() {
         return "filters.crop";
     }

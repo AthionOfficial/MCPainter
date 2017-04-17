@@ -26,8 +26,6 @@ package org.PrimeSoft.MCPainter.utils;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.PrimeSoft.MCPainter.MCPainterMain;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;

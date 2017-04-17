@@ -28,7 +28,6 @@ import org.PrimeSoft.MCPainter.utils.ExtFileFilter;
 import org.PrimeSoft.MCPainter.utils.VersionChecker;
 import org.PrimeSoft.MCPainter.palettes.PaletteManager;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +43,6 @@ import org.PrimeSoft.MCPainter.Drawing.Filters.FilterManager;
 import org.PrimeSoft.MCPainter.Drawing.IColorMap;
 import org.PrimeSoft.MCPainter.Drawing.Statue.PlayerStatueDescription;
 import org.PrimeSoft.MCPainter.Drawing.Statue.StatueDescription;
-import org.PrimeSoft.MCPainter.MCStats.MetricsLite;
 import org.PrimeSoft.MCPainter.MapDrawer.MapHelper;
 import org.PrimeSoft.MCPainter.Texture.TextureManager;
 import org.PrimeSoft.MCPainter.Texture.TexturePack;
@@ -52,7 +50,6 @@ import org.PrimeSoft.MCPainter.Texture.TextureProvider;
 import org.PrimeSoft.MCPainter.mods.*;
 import org.PrimeSoft.MCPainter.palettes.IPalette;
 import org.PrimeSoft.MCPainter.palettes.Palette;
-import org.PrimeSoft.MCPainter.utils.ExceptionHelper;
 import org.PrimeSoft.MCPainter.worldEdit.IWorldEdit;
 import org.PrimeSoft.MCPainter.worldEdit.WorldEditFactory;
 import org.bukkit.ChatColor;
@@ -76,13 +73,11 @@ public class MCPainterMain extends JavaPlugin {
     private Boolean m_isInitialized = false;
     private IColorMap m_colorMap = null;
     private IWorldEdit m_worldEdit = null;
-    private MetricsLite m_metrics;
     private BlockPlacer m_blockPlacer;
     private TextureManager m_textureManager;
     private PaletteManager m_paletteManager;
     private final EventListener m_listener = new EventListener(this);
     private MapHelper m_mapHelper;
-    private BlocksHubIntegration m_blocksHub;
     private BlockCommand m_blockCommand;
     private MapCommand m_mapCommand;
     private HdImageCommand m_hdImageCommand;
@@ -101,10 +96,6 @@ public class MCPainterMain extends JavaPlugin {
 
     public TextureManager getTextureProvider() {
         return m_textureManager;
-    }
-
-    public BlocksHubIntegration getBlocksHub() {
-        return m_blocksHub;
     }
 
     public BlockPlacer getBlockPlacer() {
@@ -155,17 +146,6 @@ public class MCPainterMain extends JavaPlugin {
         PluginDescriptionFile desc = getDescription();
         s_prefix = String.format("[%s]", desc.getName());
         m_isInitialized = false;
-
-        try {
-            m_metrics = new MetricsLite(this);
-            m_metrics.start();
-        } catch (IOException e) {
-            ExceptionHelper.printException(e, "Error initializing MCStats");
-        }
-
-        if (!FoundManager.load(this)) {
-            log("Error initializing eco.");
-        }
 
         s_console = getServer().getConsoleSender();
 
@@ -345,12 +325,10 @@ public class MCPainterMain extends JavaPlugin {
     private String initializeConfig() {
         m_textureManager.dispose();
         m_paletteManager.clear();
-        m_blocksHub = new BlocksHubIntegration(this);
 
         if (m_blockPlacer != null) {
             m_blockPlacer.queueStop();
         }
-        m_blockPlacer = new BlockPlacer(this, m_blocksHub);
         m_modProvider = new ModsProvider(ConfigProvider.getModFolder());
 
         DataFile[] dataFiles = DataFile.processFiles(ConfigProvider.getDataFolder());

@@ -42,7 +42,6 @@ class StubEditEditSession implements IEditSession {
         m_world = stubLocalPlayer.getWorld();
     }
 
-    @Override
     public BaseBlock getBlock(Vector location) {
         Location l = new Location(m_world, location.getX(), location.getY(), location.getZ());
         Chunk chunk = l.getChunk();
@@ -54,7 +53,6 @@ class StubEditEditSession implements IEditSession {
         return new BaseBlock(b.getType(), b.getData());
     }
 
-    @Override
     public void setBlock(Vector location, BaseBlock block) throws MaxChangedBlocksException {
         Location l = new Location(m_world, location.getX(), location.getY(), location.getZ());
         Chunk chunk = l.getChunk();

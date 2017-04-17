@@ -41,7 +41,6 @@ public class WorldEditLocalSession implements ILocalSession {
         return m_localSession;
     }
 
-    @Override
     public void remember(IEditSession eSession) {
         if (!(eSession instanceof WorldEditEditSession)){
             throw new UnsupportedOperationException("Invalid argument."); 
@@ -50,7 +49,6 @@ public class WorldEditLocalSession implements ILocalSession {
         m_localSession.remember(((WorldEditEditSession)eSession).getEditSession());
     }
 
-    @Override
     public IEditSession createEditSession(ILocalPlayer localPlayer) {
         if (!(localPlayer instanceof WorldEditLocalPlayer)) {
             throw new UnsupportedOperationException("Invalid argument."); 

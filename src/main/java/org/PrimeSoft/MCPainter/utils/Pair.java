@@ -61,7 +61,7 @@ public class Pair<T1, T2> {
             return false;
         }
 
-        Pair first = (Pair) obj;
+        Pair<?, ?> first = (Pair<?, ?>) obj;
         return safeEqual(first.m_first, m_first)
                 && safeEqual(first.m_second, m_second);
     }

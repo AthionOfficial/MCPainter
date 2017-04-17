@@ -58,7 +58,6 @@ public class EventListener implements Listener {
         }
 
         new Thread(new Runnable() {
-            @Override
             public void run() {
                 if (ConfigProvider.getCheckUpdate()) {
                     PluginDescriptionFile desc = m_parent.getDescription();

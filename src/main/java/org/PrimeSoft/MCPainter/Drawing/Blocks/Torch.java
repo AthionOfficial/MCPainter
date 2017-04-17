@@ -26,7 +26,6 @@ package org.PrimeSoft.MCPainter.Drawing.Blocks;
 import org.PrimeSoft.MCPainter.blocksplacer.BlockLoger;
 import org.PrimeSoft.MCPainter.Configuration.ConfigProvider;
 import org.PrimeSoft.MCPainter.Configuration.OperationType;
-import org.PrimeSoft.MCPainter.Drawing.Face;
 import org.PrimeSoft.MCPainter.Drawing.IColorMap;
 import org.PrimeSoft.MCPainter.Drawing.ImageHelper;
 import org.PrimeSoft.MCPainter.utils.Orientation;
@@ -43,9 +42,6 @@ import org.bukkit.configuration.ConfigurationSection;
 public class Torch extends BaseBlock {
 
     public final static String NAME = "TORCH";
-    private Face m_diagonal;
-    private Vector m_size2;
-
     public Torch(TextureManager textureManager, ConfigurationSection bp) {
         super(textureManager, bp);
 
@@ -63,11 +59,10 @@ public class Torch extends BaseBlock {
         for (int i = 0; i < 4; i++) {
             m_faces[i].setDelta(7);
         }
-        m_diagonal = m_faces[4];
         m_faces[4] = null;
         m_faces[5] = null;
 
-        m_size2 = new Vector(ConfigProvider.BLOCK_SIZE, ConfigProvider.BLOCK_SIZE, 6);
+        new Vector(ConfigProvider.BLOCK_SIZE, ConfigProvider.BLOCK_SIZE, 6);
     }
 
     @Override

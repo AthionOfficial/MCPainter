@@ -23,8 +23,6 @@
  */
 package org.PrimeSoft.MCPainter.utils;
 
-import org.bukkit.Location;
-
 /**
  *
  * @author SBPrime

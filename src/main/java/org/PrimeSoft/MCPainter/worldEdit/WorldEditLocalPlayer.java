@@ -42,17 +42,14 @@ public class WorldEditLocalPlayer implements ILocalPlayer {
         return m_localPlayer;
     }
     
-    @Override
     public Vector getPosition() {
         return WorldEditWrapper.convert(m_localPlayer.getPosition());
     }
 
-    @Override
     public double getYaw() {
         return m_localPlayer.getYaw();
     }
 
-    @Override
     public double getPitch() {
         return m_localPlayer.getPitch();
     }

@@ -40,7 +40,6 @@ public class ColorPalette implements IColorPalette {
         }
     }
 
-    @Override
     public ColorEx findClosestColor(ColorEx c) {
         if (c.isTransparent()) {
             return ColorEx.TRANSPARENT;

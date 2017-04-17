@@ -39,17 +39,14 @@ class StubLocalPlayer implements ILocalPlayer {
         m_player = player;
     }
 
-    @Override
     public Vector getPosition() {
         return new Vector(m_player.getLocation());
     }
 
-    @Override
     public double getYaw() {
         return m_player.getLocation().getYaw();
     }
 
-    @Override
     public double getPitch() {
         return m_player.getLocation().getPitch();
     }

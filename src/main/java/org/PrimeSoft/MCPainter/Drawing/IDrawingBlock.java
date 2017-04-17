@@ -25,7 +25,6 @@ package org.PrimeSoft.MCPainter.Drawing;
 
 import java.util.EnumSet;
 import org.PrimeSoft.MCPainter.Configuration.OperationType;
-import org.PrimeSoft.MCPainter.blocksplacer.BlockLoger;
 import org.PrimeSoft.MCPainter.utils.Vector;
 
 /**
@@ -37,5 +36,6 @@ public interface IDrawingBlock {
     
     public EnumSet<OperationType> getType();
     
-    public void place(Vector origin, Vector offset, BlockLoger loger);
+    public void place(Vector origin, Vector offset);
+
 }

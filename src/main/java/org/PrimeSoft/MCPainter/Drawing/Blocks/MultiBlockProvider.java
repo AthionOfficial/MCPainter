@@ -63,7 +63,6 @@ public class MultiBlockProvider implements IBlockProvider {
         return true;
     }
 
-    @Override
     public int getBlocksCount() {
         int sum = 0;
         for (IBlockProvider bp : m_blockProviders) {
@@ -72,7 +71,6 @@ public class MultiBlockProvider implements IBlockProvider {
         return sum;
     }
 
-    @Override
     public IDrawableElement getBlock(String name) {
         synchronized (m_blockProviders) {
             for (IBlockProvider blockProvider : m_blockProviders) {
@@ -85,7 +83,6 @@ public class MultiBlockProvider implements IBlockProvider {
         return null;
     }
 
-    @Override
     public IDrawableElement getBlock(int materialId) {
         synchronized (m_blockProviders) {
             for (IBlockProvider blockProvider : m_blockProviders) {

@@ -32,22 +32,18 @@ import org.bukkit.entity.Player;
  */
 public class StubWrapper implements IWorldEdit {
 
-    @Override
     public boolean isRealWorldEdit() {
         return false;
     }
 
-    @Override
     public ILocalSession getSession(Player player) {
         return new StubLocalSession(player);
     }
 
-    @Override
     public ILocalPlayer wrapPlayer(Player player) {
         return new StubLocalPlayer(player);
     }
 
-    @Override
     public ICuboidSelection getSelection(Player player) {
         return null;
     }

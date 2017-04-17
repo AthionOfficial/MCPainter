@@ -27,11 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.PrimeSoft.MCPainter.Configuration.ConfigProvider;
 import org.PrimeSoft.MCPainter.MCPainterMain;
-import org.PrimeSoft.MCPainter.utils.BaseBlock;
-import org.PrimeSoft.MCPainter.utils.Vector;
 import org.PrimeSoft.MCPainter.worldEdit.IEditSession;
 import org.PrimeSoft.MCPainter.worldEdit.ILocalSession;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -50,7 +47,6 @@ public class BlockLoger {
     private final ILocalSession m_session;
     private final IEditSession m_editSession;
     private final World m_world;
-    private final MCPainterMain m_mainPlugin;
     private final BlockPlacer m_blocksPlacer;
 
     public World getWorld() {
@@ -82,27 +78,7 @@ public class BlockLoger {
         m_session = session;
         m_editSession = eSession;
         m_world = m_player.getWorld();
-        m_mainPlugin = main;
         m_blocksPlacer = main.getBlockPlacer();
-    }
-
-    public void logCommand(ILoggerCommand command) {
-        Location location = command.getLocation();
-        if (m_mainPlugin.getBlocksHub().canPlace(m_player.getName(), m_world, location)) {
-            synchronized (m_mutex) {
-                m_blocks.add(new CommandEntry(this, command));
-            }
-            checkFlush();
-        }
-    }
-    
-    public void logBlock(Vector location, BaseBlock block) {
-        if (m_mainPlugin.getBlocksHub().canPlace(m_player.getName(), m_world, location)) {
-            synchronized (m_mutex) {
-                m_blocks.add(new BlockEntry(this, location, block));                
-            }
-            checkFlush();
-        }
     }
 
     public void logEndSession() {

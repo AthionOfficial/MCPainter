@@ -38,27 +38,22 @@ public class WorldEditCuboidSelection implements ICuboidSelection {
         m_selection = cSelection;
     }
 
-    @Override
     public Location getMinimumPoint() {
         return m_selection.getMinimumPoint();
     }
 
-    @Override
     public Location getMaximumPoint() {
         return m_selection.getMaximumPoint();
     }
 
-    @Override
     public int getLength() {
         return m_selection.getLength();
     }
 
-    @Override
     public int getWidth() {
         return m_selection.getWidth();
     }
 
-    @Override
     public int getHeight() {
         return m_selection.getHeight();
     }

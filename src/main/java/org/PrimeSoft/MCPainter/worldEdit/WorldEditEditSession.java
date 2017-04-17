@@ -43,7 +43,6 @@ public class WorldEditEditSession implements IEditSession {
         return m_editSession;
     }
 
-    @Override
     public BaseBlock getBlock(Vector location) {
         com.sk89q.worldedit.Vector v = WorldEditWrapper.convert(location);
         com.sk89q.worldedit.blocks.BaseBlock block = m_editSession.getBlock(v);
@@ -51,7 +50,6 @@ public class WorldEditEditSession implements IEditSession {
         return WorldEditWrapper.convert(block);
     }
 
-    @Override
     public void setBlock(Vector location, BaseBlock block) throws MaxChangedBlocksException {
         com.sk89q.worldedit.blocks.BaseBlock weBlock = WorldEditWrapper.convert(block);
         com.sk89q.worldedit.Vector weLocaton = WorldEditWrapper.convert(location);

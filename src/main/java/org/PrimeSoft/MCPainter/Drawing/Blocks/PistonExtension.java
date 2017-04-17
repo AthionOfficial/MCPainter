@@ -129,7 +129,6 @@ public class PistonExtension extends BaseBlock {
             IColorMap colorMap, Vector position) {
         Face[] faces = null;
 
-        int topId = (data & 0x8) == 0x8 ? 1 : 0;
         int w = 4;
         int h = 4;
         int d = 4;

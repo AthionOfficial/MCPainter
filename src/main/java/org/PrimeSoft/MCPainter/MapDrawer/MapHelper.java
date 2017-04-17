@@ -108,7 +108,6 @@ public class MapHelper {
         File mapDir = ConfigProvider.getImgFolder();
         File[] files = mapDir.listFiles(new FilenameFilter() {
 
-            @Override
             public boolean accept(File dir, String name) {
                 return name.toLowerCase().endsWith(".png");
             }

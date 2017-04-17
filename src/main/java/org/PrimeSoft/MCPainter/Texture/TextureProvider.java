@@ -25,7 +25,6 @@ package org.PrimeSoft.MCPainter.Texture;
 
 import java.io.File;
 import org.PrimeSoft.MCPainter.Drawing.RawImage;
-import org.PrimeSoft.MCPainter.MCPainterMain;
 
 /**
  *

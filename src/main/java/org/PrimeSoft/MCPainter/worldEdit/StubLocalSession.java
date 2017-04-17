@@ -35,11 +35,9 @@ class StubLocalSession implements ILocalSession {
     public StubLocalSession(Player player) {        
     }
 
-    @Override
     public void remember(IEditSession eSession) {        
     }
 
-    @Override
     public IEditSession createEditSession(ILocalPlayer localPlayer) {
         if (!(localPlayer instanceof StubLocalPlayer)) {
             throw new UnsupportedOperationException("Invalid argument."); 

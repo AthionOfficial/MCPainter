@@ -42,7 +42,7 @@ import org.bukkit.map.MapPalette;
  */
 public class FilterManager {
 
-    private final static List<IImageFilter> s_filters = new ArrayList();
+    private final static List<IImageFilter> s_filters = new ArrayList<IImageFilter>();
     private final static HashMap<Player, FilterManager> s_playerFilters = new HashMap<Player, FilterManager>();
     private final static IColorPalette s_mapPalette = getMapPalette();
 

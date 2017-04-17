@@ -206,12 +206,10 @@ public class ModBlockProvider implements IBlockProvider {
         return added;
     }
 
-    @Override
     public int getBlocksCount() {
         return m_cnt;
     }
 
-    @Override
     public IDrawableElement getBlock(String name) {
         if (name == null) {
             return null;
@@ -235,7 +233,6 @@ public class ModBlockProvider implements IBlockProvider {
         return null;
     }
 
-    @Override
     public IDrawableElement getBlock(int materialId) {
         if (m_idBlocks.containsKey(materialId)) {
             return m_idBlocks.get(materialId);

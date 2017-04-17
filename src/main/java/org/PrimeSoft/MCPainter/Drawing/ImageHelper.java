@@ -549,7 +549,6 @@ public class ImageHelper {
     public static int[][] convertToRGB(BufferedImage image, boolean[] useAlpha) {
         final int width = image.getWidth();
         final int height = image.getHeight();
-        final boolean hasAlphaChannel = image.getAlphaRaster() != null;
         final int[] pixels = image.getRGB(0, 0, width, height, null, 0, width);
 
         boolean uAlpha = false;

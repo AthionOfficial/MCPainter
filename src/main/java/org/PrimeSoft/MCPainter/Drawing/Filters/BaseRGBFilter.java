@@ -34,13 +34,10 @@ import org.bukkit.entity.Player;
  */
 public abstract class BaseRGBFilter implements IImageFilter {
 
-    @Override
     public abstract String getName();
 
-    @Override
     public abstract boolean hasPerms(Player player);
 
-    @Override
     public BufferedImage process(BufferedImage src, IFilterParams params) {
         boolean[] useAlpha = new boolean[1];
         int[][] rgb = ImageHelper.convertToRGB(src, useAlpha);
@@ -60,12 +57,9 @@ public abstract class BaseRGBFilter implements IImageFilter {
 
     public abstract int[][] process(int[][] rgb, int width, int height, boolean hasAlpha, IFilterParams params);
 
-    @Override
     public abstract FilterEntry getEntry(String[] args);
 
-    @Override
     public abstract String[] getHelp();
     
-    @Override
     public abstract String getPriceName();
 }

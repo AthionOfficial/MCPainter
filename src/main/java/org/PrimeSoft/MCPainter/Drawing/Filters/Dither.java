@@ -23,7 +23,6 @@
  */
 package org.PrimeSoft.MCPainter.Drawing.Filters;
 
-import java.awt.Color;
 import org.PrimeSoft.MCPainter.PermissionManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -42,7 +41,6 @@ public class Dither extends BaseRGBFilter {
          */
         private IColorPalette m_palette;
 
-        @Override
         public void setPalette(IColorPalette pal) {
             m_palette = pal;
         }
@@ -51,7 +49,6 @@ public class Dither extends BaseRGBFilter {
             return m_palette;
         }
 
-        @Override
         public String print() {
             return "";
         }

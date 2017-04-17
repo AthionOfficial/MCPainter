@@ -26,7 +26,6 @@ package org.PrimeSoft.MCPainter.voxelyzer;
 import java.util.Arrays;
 import java.util.Comparator;
 import org.PrimeSoft.MCPainter.blocksplacer.BlockLoger;
-import org.PrimeSoft.MCPainter.Drawing.ColorMap;
 import org.PrimeSoft.MCPainter.Drawing.IColorMap;
 import org.PrimeSoft.MCPainter.Drawing.RawImage;
 import org.PrimeSoft.MCPainter.utils.Vector;
@@ -42,7 +41,6 @@ public class Triangle {
      */
     private final static Comparator<Vertex> s_vertexCompatator = new Comparator<Vertex>() {
 
-        @Override
         public int compare(Vertex o1, Vertex o2) {
             return (int) (Math.signum(o1.getX() - o2.getX()));
         }

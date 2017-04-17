@@ -25,7 +25,6 @@ public class ColorMap implements IColorMap {
     private final Boolean m_isInitialized;
     private final DrawingBlock[] m_blocks;
 
-    @Override
     public Boolean isInitialized() {
         return m_isInitialized;
     }
@@ -112,7 +111,6 @@ public class ColorMap implements IColorMap {
      * @param type block operation type
      * @return block entry
      */
-    @Override
     public IDrawingBlock getBlockForColor(Color c, OperationType type) {
         /*if (c.getAlpha() < ALPHA_THRESHOLD) {
          return BlockEntry.AIR;
@@ -144,7 +142,6 @@ public class ColorMap implements IColorMap {
      * @param type operation type
      * @return Pallete
      */
-    @Override
     public IColorPalette getPalette(OperationType type) {
         List<Color> result = new ArrayList<Color>();
         for (DrawingBlock blockEntry : m_blocks) {

@@ -47,24 +47,20 @@ public class WorldEditWrapper implements IWorldEdit {
     }
     
     
-    @Override
     public boolean isRealWorldEdit() {
         return true;
     }
 
-    @Override
     public ILocalSession getSession(Player player) {
         LocalSession lSession = m_worldEdit.getSession(player);
         return new WorldEditLocalSession(lSession);
     }
 
-    @Override
     public ILocalPlayer wrapPlayer(Player player) {
         LocalPlayer lPlayer = m_worldEdit.wrapPlayer(player);
         return new WorldEditLocalPlayer(lPlayer);
     }
 
-    @Override
     public ICuboidSelection getSelection(Player player) {
         Selection selection = m_worldEdit.getSelection(player);
         if (!(selection instanceof CuboidSelection)) {

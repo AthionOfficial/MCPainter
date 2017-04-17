@@ -1,0 +1,13 @@
+################################################################################
+# MCPainter mod definition file
+# Mod name: Minecraft 1.8.x
+# Author:   SBPrime
+# Description:
+#   Vanilla minecraft texture resources definition file
+################################################################################
+DisplayName: Minecraft 1.8.x
+ModId: 1\.8\..+
+ModIdAlternative: VANILLA
+Version:
+TextureRes: 16
+Assets: /assets/minecraft/

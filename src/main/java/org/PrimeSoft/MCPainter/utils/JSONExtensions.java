@@ -23,7 +23,6 @@
  */
 package org.PrimeSoft.MCPainter.utils;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import static org.PrimeSoft.MCPainter.MCPainterMain.log;
 import org.json.simple.JSONArray;
