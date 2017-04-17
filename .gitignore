@@ -1,8 +1,0 @@
-*.jar
-*.class
-*build/
-*lib/
-*test/
-*dist/
-/MCPainter/nbproject/private/
-*genfiles.properties
