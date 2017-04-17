@@ -103,7 +103,7 @@ public class ImageHelper {
                     Color c = new Color(img.getRGB(xx, hh - yy - 1), true);
                     IDrawingBlock block = colorMap.getBlockForColor(c, OperationType.Image);
                     
-                    block.place(pos, new Vector(x, y, z), loger);
+                    block.place(pos, new Vector(x, y, z));
                 }
             }
         }
@@ -286,7 +286,7 @@ public class ImageHelper {
                             int dz = orientation.calcZ(px, py, pz);
                             
                             if (dy + pY >= 0 && dy + pY <= 255) {
-                                block.place(pos, new Vector(dx, dy, dz), loger);
+                                block.place(pos, new Vector(dx, dy, dz));
                             }
                         }
                     }
@@ -418,7 +418,7 @@ public class ImageHelper {
 
                         if (block!= null && !block.isAir()) {
                             if (pY + dy >= 0 && pY + dy <= 255 && block != null) {
-                                block.place(pos, new Vector(dx, dy, dz), loger);
+                                block.place(pos, new Vector(dx, dy, dz));
                             }
                         }
                     }
